@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>管理员登录</title>
+</head>
+<body>
+    <div class="container">
+        <h2>管理员登录</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">用户名:</label>
+                <input type="text" id="username" name="username" value="admin" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密码:</label>
+                <input type="password" id="password" name="password" value="admin" required>
+            </div>
+            <button type="submit">登录</button>
+        </form>
+        {% if redirect_url %}
+        <script>
+            window.location.href = "{{ redirect_url }}";
+        </script>
+        {% endif %}
+        {% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+    </div>
+</body>
+</html>

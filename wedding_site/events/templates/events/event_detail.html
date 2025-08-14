@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{{ event.name }} - 活动详情</title>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ event.name }}</h1>
+        <p><strong>时间:</strong> {{ event.date }}</p>
+        <p><strong>地点:</strong> {{ event.location }}</p>
+        <p><strong>描述:</strong> {{ event.description }}</p>
+
+    {# 管理员界面才显示编辑和删除按钮，普通用户界面不显示 #}
+    {% if request.path|slice:":13" == '/events_manage' %}
+    <a href="{% url 'event_edit' event.id %}">编辑活动</a>
+    <a href="{% url 'event_confirm_delete' event.id %}">删除活动</a>
+    {% endif %}
+    {% if admin %}
+    <a href="{% url 'event_manage' %}">返回活动管理</a>
+    {% else %}
+    <a href="{% url 'event_list' %}">返回活动列表</a>
+    {% endif %}
+    </div>
+</body>
+</html>

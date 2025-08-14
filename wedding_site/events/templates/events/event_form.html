@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{% if event %}编辑活动{% else %}创建活动{% endif %}</title>
+</head>
+<body>
+    <div class="container">
+        <h1>{% if event %}编辑活动{% else %}创建活动{% endif %}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">保存</button>
+        </form>
+        <a href="{% url 'event_list' %}">返回活动列表</a>
+    </div>
+</body>
+</html>

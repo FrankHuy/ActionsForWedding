@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>活动列表</title>
+</head>
+<body>
+    <div class="container">
+        <h1>活动列表</h1>
+    {% if admin %}
+    <a href="{% url 'event_create' %}" class="btn">新增活动</a>
+    {% endif %}
+        <table>
+            <thead>
+                <tr>
+                    <th>活动名称</th>
+                    <th>活动时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <td><a href="{% url 'event_detail' event.id %}">{{ event.name }}</a></td>
+                    <td>{{ event.date }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">没有活动可显示。</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
